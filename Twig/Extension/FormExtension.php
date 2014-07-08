@@ -35,6 +35,67 @@ class FormExtension extends \Twig_Extension
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getFilters()
+    {
+        return array(
+            'e4js'  =>  new \Twig_Filter_Method($this, 'export_for_js'),
+        );
+    }
+
+    /**
+     * Export variable for javascript
+     *
+     * @param string $var
+     * @return string
+     */
+    public function export_for_js($var)
+    {
+        $functionPattern = "%^\\s*function\\s*\\(%is";
+        $jsonPattern = "%^\\s*\\{.*\\}\\s*$%is";
+        $arrayPattern = "%^\\s*\\[.*\\]\\s*$%is";
+
+        if (is_bool($var)) {
+            return $var ? 'true' : 'false';
+        }
+
+        if (is_null($var)) {
+            return 'null';
+        }
+
+        if ('undefined' === $var) {
+            return 'undefined';
+        }
+
+        if (is_string($var) && !preg_match($functionPattern, $var) && !preg_match($jsonPattern, $var) && !preg_match($arrayPattern, $var)) {
+            return '"'.str_replace('"', '&quot;', $var).'"';
+        }
+
+        if (is_array($var)) {
+            $is_assoc = function ($array) {
+                return (bool)count(array_filter(array_keys($array), 'is_string'));
+            };
+
+            if ($is_assoc($var)) {
+                $items = array();
+                foreach($var as $key => $val) {
+                    $items[] = '"'.$key.'": '.$this->export_for_js($val);
+                }
+                return '{'.implode(',', $items).'}';
+            } else {
+                $items = array();
+                foreach($var as $val) {
+                    $items[] = $this->export_for_js($val);
+                }
+                return '['.implode(',', $items).']';
+            }
+        }
+
+        return $var;
+    }
+
+    /**
      * Render Function Form Javascript
      *
      * @param FormView $view
