@@ -13,7 +13,7 @@ If used properly, they make embeding collections of JS-enhanced form types very 
 
 ```json
 "require": {
-    "admingenerator/form-bundle": "@stable"
+    "symfony2admingenerator/form-bundle": "@stable"
 }
 ```
 
