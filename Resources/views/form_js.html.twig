@@ -1,0 +1,20 @@
+{% block form_js %}
+{% spaceless %}
+    {% for child in form %}
+        {{ form_js(child) }}
+    {% endfor %}
+    {% block form_js_prototype %}{% endblock form_js_prototype %}
+{% endspaceless %}
+{% endblock form_js %}
+
+{% block field_js "" %}
+
+{% block button_js "" %}
+
+{% block collection_js %}
+{% spaceless %}
+	{% for child in form %}
+	    {{ form_js(child) }}
+	{% endfor %}
+{% endspaceless %}
+{% endblock collection_js %}

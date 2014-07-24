@@ -76,7 +76,7 @@ class FormExtension extends \Twig_Extension
      * Boolean             > output true or false
      * Null                > output null
      * Undefined           > output undefined
-     * Other strins        > replace quotes with &quot; and output
+     * Other strings       > replace quotes with &quot; and output
      *                     |   wrapped in quotes
      *
      * @param string $var
@@ -112,13 +112,13 @@ class FormExtension extends \Twig_Extension
             if ($is_assoc($var)) {
                 $items = array();
                 foreach($var as $key => $val) {
-                    $items[] = '"'.$key.'": '.$this->export_for_js($val);
+                    $items[] = '"'.$key.'": '.$this->escape_for_js($val);
                 }
                 return '{'.implode(',', $items).'}';
             } else {
                 $items = array();
                 foreach($var as $val) {
-                    $items[] = $this->export_for_js($val);
+                    $items[] = $this->escape_for_js($val);
                 }
                 return '['.implode(',', $items).']';
             }
