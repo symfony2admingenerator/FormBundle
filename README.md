@@ -21,6 +21,7 @@ And run `composer update` in your project root directory.
 
 #### 1.2 Enable the bundle in your `AppKernel.php`:
 
+
 ```php
 <?php
 // AppKernel.php
@@ -31,11 +32,61 @@ public function registerBundles()
         new Admingenerator\FormBundle\AdmingeneratorFormBundle(),
     );
 }
+?>
 ```
 
 # 2. Usage
 
-TODO
+This bundle adds new twig blocks for your form. In Symfony2 for form type aliased `my_form` you have one block `my_form_widget` where you put everything related to your form type. And that's totally fine for default Symfony2 form types, as they include only basic form elements.
+
+To introduce nice GUI form widgets, we need to style them with CSS and enhance their functionality with JS. So, for these purposes, this bundle introduces new blocks. In our example, that would be `my_form_css` and `my_form_js`.
+
+### Javascript enhanced forms in collections
+
+To make implementing add/remove items to collection of forms easier, we've also added a javascript prototype block, which resides inside the form javascript block. Example:
+
+```html+django
+{% block my_form_js %}
+<script type="text/javascript">
+	// note: this example uses jQuery
+	$field = $("#{{ id }}");
+
+	{% block my_form_js_prototype %}
+		// add thick red border to the field
+		$field.css({
+			'border-color': 'red',
+			'border-width': '10px',
+			'border-style': 'solid'
+		});
+	{% block}
+</script>
+{% endblock %}
+```
+
+This way we've seperated the javascript selector code from widget initialization code, which now can be used in our collection widget:
+
+```html+django
+{% block my_collection_form_js %}
+<script type="text/javascript">
+	var $collection = $('#{{ id }}');
+	var $addButton 	= $('#{{ id ~ "_add_button" }}');
+
+	var initJS = function($field) {
+		// include js prototype code
+		{{ form_js(prototype, true) }}
+	};
+
+	$addButton.on('click', function(e){
+		// here create $newItem and add it to the page
+		initJS($newItem);
+	});
+</script>
+{% endblock %}
+```
+
+> **Note**: this snippet does not include code to add new item, as this is already covered by [How to Embed a Collection of Forms][sf2-cookbook-collection-add] cookbook.
+
+For example usage study the [AdmingeneratorFormExtensionsBundle][s2a-form-extensions] (templates in `Resources/views/Form` directory).
 
 # 3. Acknowledgements
 
@@ -46,3 +97,6 @@ The bundle is great, however for our purposes, we only need the Twig Extension, 
 # 4. License
 
 This bundle is released under the [MIT License](LICENSE).
+
+[sf2-cookbook-collection-add]: http://symfony.com/doc/current/cookbook/form/form_collections.html
+[s2a-form-extensions]: http://github.com/symfony2admingenerator/FormExtensionsBundle
