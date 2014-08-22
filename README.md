@@ -94,9 +94,35 @@ The twig extension is copied from [GenemuFormBundle](https://github.com/genemu/G
 
 The bundle is great, however for our purposes, we only need the Twig Extension, so we decided to extract it and put it into a seperate bundle.
 
-# 4. License
+# 4. Versioning
 
-This bundle is released under the [MIT License](LICENSE).
+Releases will be numbered with the format `major.minor.patch`.
+
+And constructed with the following guidelines.
+
+* Breaking backwards compatibility bumps the major.
+* New additions without breaking backwards compatibility bumps the minor.
+* Bug fixes and misc changes bump the patch.
+
+For more information on SemVer, please visit [semver.org][semver] website.
+
+# 5. Contributing
+
+This bundle follows branching model described in [A successful git branching model][branching-model-post] blog post by Vincent Driessen.
+
+* The `master` branch is used to tag stable releases.
+* The `develop` branch is used to develop small changes and merge feature branches into it.
+* The `feature-` branches are used to develop features. When ready, submit a PR to `develop` branch.
+* The `hotfixes` branch is used to develop fixes to severe bugs in stable releases. When ready, the fix is merged both to `develop` and `master` branches.
+* The release branches (eg. `1.1`) are created for each minor release and only patches will be merged into them.
+
+![Branching model](https://github.com/symfony2admingenerator/FormBundle/raw/master/Resources/doc/branching-model.png)
+
+# 6. License
+
+This bundle is released under the [MIT License](LICENSE) except for the file: `Resources/doc/branching-model.png` by Vincent Driessen, which is released under `Creative Commons BY-SA`.
 
 [sf2-cookbook-collection-add]: http://symfony.com/doc/current/cookbook/form/form_collections.html
 [s2a-form-extensions]: http://github.com/symfony2admingenerator/FormExtensionsBundle
+[semver]: http://semver.org
+[branching-model-post]: http://nvie.com/posts/a-successful-git-branching-model/
