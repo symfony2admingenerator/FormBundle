@@ -20,12 +20,18 @@
         "twig/extensions": "~1.0"
     },
     "suggest": {
-        "cedriclombardot/admingenerator-generator-bundle": "The missing symfony2 admin generator"
+        "symfony2admingenerator/generator-bundle": "The missing symfony2 admin generator",
+        "symfony2admingenerator/form-extensions-bundle": "Symfony2 form extensions for Admingenerator project (also working standalone!)"
     },
     "autoload": {
         "psr-0": {
             "Admingenerator\\FormBundle": ""
         }
     },
-    "target-dir": "Admingenerator/FormBundle"
+    "target-dir": "Admingenerator/FormBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.0-dev"
+        }
+    }
 }
