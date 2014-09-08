@@ -41,7 +41,8 @@ class FormExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'e4js'  =>  new \Twig_Filter_Method($this, 'escape_for_js'),
+            'e4js'      => new \Twig_Filter_Method($this, 'escape_for_js'),
+            'nowrap'    => new \Twig_Filter_Method($this, 'nowrap'),
         );
     }
 
@@ -58,6 +59,16 @@ class FormExtension extends \Twig_Extension
         $block = $prototype ? 'js_prototype' : 'js';
 
         return $this->renderer->searchAndRenderBlock($view, $block);
+    }
+
+    /**
+     * Removes newlines from string
+     * 
+     * @return string
+     */
+    public function nowrap($var)
+    {
+        return preg_replace('(\r\n|\r|\n)', '', $var);
     }
 
     /**
