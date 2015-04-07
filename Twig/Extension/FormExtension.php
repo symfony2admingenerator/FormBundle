@@ -80,6 +80,7 @@ class FormExtension extends \Twig_Extension
      * Value               | behaviour
      * ====================|======================================
      * Anonymous function  > output raw
+     * Function call       > output raw
      * Json object         > recursively iterate over properties,
      *                     |   and escape each value individually
      * Json array          > recursively iterate over values,
@@ -96,6 +97,7 @@ class FormExtension extends \Twig_Extension
     public function escape_for_js($var)
     {
         $functionPattern = "%^\\s*function\\s*\\(%is";
+        $callPattern = "%^\w+\((\w+(,\\s\w+)*)?\)$%is";
         $jsonPattern = "%^\\s*\\{.*\\}\\s*$%is";
         $arrayPattern = "%^\\s*\\[.*\\]\\s*$%is";
 
@@ -111,9 +113,14 @@ class FormExtension extends \Twig_Extension
             return 'undefined';
         }
 
-        if (is_string($var) && !preg_match($functionPattern, $var) && !preg_match($jsonPattern, $var) && !preg_match($arrayPattern, $var)) {
-            $var = preg_replace('(\r\n|\r|\n)', '', $var);
-            return '"'.str_replace('"', '&quot;', $var).'"';
+        if (is_string($var)
+            && !preg_match($functionPattern, $var) 
+            && !preg_match($callPattern, $var)
+            && !preg_match($jsonPattern, $var)
+            && !preg_match($arrayPattern, $var)
+        ) {
+             $var = preg_replace('(\r\n|\r|\n)', '', $var);
+             return '"'.str_replace('"', '&quot;', $var).'"';
         }
 
         if (is_array($var)) {
