@@ -119,8 +119,8 @@ class FormExtension extends \Twig_Extension
             && !preg_match($jsonPattern, $var)
             && !preg_match($arrayPattern, $var)
         ) {
-             $var = preg_replace('(\r\n|\r|\n)', '', $var);
-             return '"'.str_replace('"', '&quot;', $var).'"';
+            $var = preg_replace('(\r\n|\r|\n)', '', $var);
+            return '"'.str_replace('"', '&quot;', $var).'"';
         }
 
         if (is_array($var)) {
