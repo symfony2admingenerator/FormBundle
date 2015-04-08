@@ -97,7 +97,7 @@ class FormExtension extends \Twig_Extension
     public function escape_for_js($var)
     {
         $functionPattern = "%^\\s*function\\s*\\(%is";
-        $callPattern = "%^\w+\((\w+(,\\s\w+)*)?\)$%is";
+        $callPattern = "%^\w+\((\w+(,\\s\w+)*)?\)(\.\w+\((\w+(,\\s\w+)*)?\))?$%is";
         $jsonPattern = "%^\\s*\\{.*\\}\\s*$%is";
         $arrayPattern = "%^\\s*\\[.*\\]\\s*$%is";
 
