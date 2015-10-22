@@ -30,8 +30,8 @@ class FormExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'form_js' => new \Twig_Function_Method($this, 'renderJavascript', array('is_safe' => array('html'))),
-            'form_css' => new \Twig_Function_Node('Symfony\Bridge\Twig\Node\SearchAndRenderBlockNode', array('is_safe' => array('html'))),
+            'form_js' => new \Twig_SimpleFunction('form_js', array($this, 'renderJavascript'), array('is_safe' => array('html'))),
+            'form_css' => new \Twig_SimpleFunction('form_css', null, array('node_class' => 'Symfony\Bridge\Twig\Node\SearchAndRenderBlockNode', 'is_safe' => array('html'))),
         );
     }
 
@@ -41,8 +41,8 @@ class FormExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'e4js'      => new \Twig_Filter_Method($this, 'escape_for_js'),
-            'nowrap'    => new \Twig_Filter_Method($this, 'nowrap'),
+            'e4js'      => new \Twig_SimpleFilter('e4js', array($this, 'escape_for_js')),
+            'nowrap'    => new \Twig_SimpleFilter('nowrap', array($this, 'nowrap')),
         );
     }
 
