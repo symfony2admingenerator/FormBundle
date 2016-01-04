@@ -30,7 +30,7 @@ class FormExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'form_js' => new \Twig_SimpleFunction('form_js', array($this, 'renderJavascript', array('is_safe' => array('html')))),
+            'form_js' => new \Twig_SimpleFunction('form_js', array($this, 'renderJavascript'), array('is_safe' => array('html'))),
             'form_css' => new \Twig_SimpleFunction('form_css', null, array('node_class' => 'Symfony\Bridge\Twig\Node\SearchAndRenderBlockNode', 'is_safe' => array('html'))),
         );
     }
