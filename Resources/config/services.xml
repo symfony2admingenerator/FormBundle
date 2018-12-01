@@ -10,7 +10,7 @@
     
     <services>
         
-        <service id="admingenerator.twig.extension.form" class="%admingenerator.twig.extension.form.class%">
+        <service id="admingenerator.twig.extension.form" class="%admingenerator.twig.extension.form.class%" lazy="true">
             <tag name="twig.extension" />
             <argument type="service" id="twig.form.renderer" />
         </service>

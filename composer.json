@@ -15,10 +15,10 @@
         }
     ],
     "require": {
-        "symfony/config": "~2.2|~3.0|~4.0",
-        "symfony/dependency-injection": "~2.2|~3.0|~4.0",
-        "symfony/form": "~2.2|~3.0|~4.0",
-        "symfony/http-kernel": "~2.2|~3.0|~4.0",
+        "symfony/config": "~2.3|~3.0|~4.0",
+        "symfony/dependency-injection": "~2.3|~3.0|~4.0",
+        "symfony/form": "~2.3|~3.0|~4.0",
+        "symfony/http-kernel": "~2.3|~3.0|~4.0",
         "twig/twig": "~1.26||~2.0",
         "twig/extensions": "~1.0"
     },
@@ -27,11 +27,10 @@
         "symfony2admingenerator/form-extensions-bundle": "Symfony2 form extensions for Admingenerator project (also working standalone!)"
     },
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "Admingenerator\\FormBundle": ""
         }
     },
-    "target-dir": "Admingenerator/FormBundle",
     "extra": {
         "branch-alias": {
             "dev-master": "1.2-dev"
