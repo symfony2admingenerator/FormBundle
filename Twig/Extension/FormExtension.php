@@ -4,12 +4,15 @@ namespace Admingenerator\FormBundle\Twig\Extension;
 
 use Symfony\Component\Form\FormRendererInterface;
 use Symfony\Component\Form\FormView;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
 
 /**
  * @author Olivier Chauvel <olivier@generation-multiple.com>
  * @author Piotr Gołębiewski <loostro@gmail.com>
  */
-class FormExtension extends \Twig_Extension
+class FormExtension extends AbstractExtension
 {
     /**
      * This property is public so that it can be accessed directly from compiled
@@ -30,8 +33,8 @@ class FormExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'form_js' => new \Twig_SimpleFunction('form_js', array($this, 'renderJavascript'), array('is_safe' => array('html'))),
-            'form_css' => new \Twig_SimpleFunction('form_css', null, array('node_class' => 'Symfony\Bridge\Twig\Node\SearchAndRenderBlockNode', 'is_safe' => array('html'))),
+            'form_js' => new TwigFunction('form_js', array($this, 'renderJavascript'), array('is_safe' => array('html'))),
+            'form_css' => new TwigFunction('form_css', null, array('node_class' => 'Symfony\Bridge\Twig\Node\SearchAndRenderBlockNode', 'is_safe' => array('html'))),
         );
     }
 
@@ -41,8 +44,8 @@ class FormExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'e4js'      => new \Twig_SimpleFilter('e4js', array($this, 'escape_for_js')),
-            'nowrap'    => new \Twig_SimpleFilter('nowrap', array($this, 'nowrap')),
+            'e4js'      => new TwigFilter('e4js', array($this, 'escape_for_js')),
+            'nowrap'    => new TwigFilter('nowrap', array($this, 'nowrap')),
         );
     }
 

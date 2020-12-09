@@ -3,7 +3,7 @@ FormBundle
 
 This bundle introduces new twig blocks: `form_js`, `form_js_prototype` and `form_css`.
 
-These blocks seperate form type's HTML structure from CSS decorating the form and JS enhancing it's functionalities. Also, the JS block includes `form_js_prototype` block, which holds any initialization logic, which should be called when adding a new field of that type.
+These blocks seperate form type's HTML structure from CSS decorating the form and JS enhancing its functionalities. Also, the JS block includes `form_js_prototype` block, which holds any initialization logic, which should be called when adding a new field of that type.
 
 If used properly, they make embeding collections of JS-enhanced form types very easy.
 
