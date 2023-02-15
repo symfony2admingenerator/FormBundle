@@ -17,47 +17,31 @@ class FormExtension extends AbstractExtension
     /**
      * This property is public so that it can be accessed directly from compiled
      * templates without having to call a getter, which slightly decreases performance.
-     *
-     * @var \Symfony\Component\Form\FormRendererInterface
      */
-    public $renderer;
-
-    public function __construct(FormRendererInterface $renderer)
+    public function __construct(public FormRendererInterface $renderer)
     {
-        $this->renderer = $renderer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFunctions()
+    public function getFunctions(): array
     {
-        return array(
-            'form_js' => new TwigFunction('form_js', array($this, 'renderJavascript'), array('is_safe' => array('html'))),
-            'form_css' => new TwigFunction('form_css', null, array('node_class' => 'Symfony\Bridge\Twig\Node\SearchAndRenderBlockNode', 'is_safe' => array('html'))),
-        );
+        return [
+            'form_js' => new TwigFunction('form_js', $this->renderJavascript(...), ['is_safe' => ['html']]),
+            'form_css' => new TwigFunction('form_css', null, ['node_class' => 'Symfony\Bridge\Twig\Node\SearchAndRenderBlockNode', 'is_safe' => ['html']]),
+        ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFilters()
+    public function getFilters(): array
     {
-        return array(
-            'e4js'      => new TwigFilter('e4js', array($this, 'escape_for_js')),
-            'nowrap'    => new TwigFilter('nowrap', array($this, 'nowrap')),
-        );
+        return [
+            'e4js'      => new TwigFilter('e4js', $this->escape_for_js(...)),
+            'nowrap'    => new TwigFilter('nowrap', $this->nowrap(...)),
+        ];
     }
 
     /**
      * Render Function Form Javascript
-     *
-     * @param FormView $view
-     * @param bool $prototype
-     *
-     * @return string
      */
-    public function renderJavascript(FormView $view, $prototype = false)
+    public function renderJavascript(FormView $view, bool $prototype = false): string
     {
         $block = $prototype ? 'js_prototype' : 'js';
 
@@ -69,7 +53,7 @@ class FormExtension extends AbstractExtension
      * 
      * @return string
      */
-    public function nowrap($var)
+    public function nowrap(string $var): string
     {
         return preg_replace('(\r\n|\r|\n)', '', $var);
     }
@@ -93,11 +77,8 @@ class FormExtension extends AbstractExtension
      * Undefined           > output undefined
      * Other strings       > replace quotes with &quot; and output
      *                     |   wrapped in quotes
-     *
-     * @param string $var
-     * @return string
      */
-    public function escape_for_js($var)
+    public function escape_for_js(mixed $var): string
     {
         $functionPattern = "%^\\s*function\\s*\\(%is";
         $callPattern = "%^\w+\((['\w\d]+(,\\s['\w\d]+)*)?\)(\.\w+\((['\w\d]+(,\\s['\w\d]+)*)?\))?$%is";
@@ -149,10 +130,7 @@ class FormExtension extends AbstractExtension
         return $var;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'admingenerator.twig.extension.form';
     }
