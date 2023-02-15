@@ -14,11 +14,6 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder('admingenerator_form');
-        $rootNode = method_exists(TreeBuilder::class, 'getRootNode')
-            ? $treeBuilder->getRootNode()
-            : $treeBuilder->root('admingenerator_form');
-
-        return $treeBuilder;
+        return new TreeBuilder('admingenerator_form');
     }
 }
