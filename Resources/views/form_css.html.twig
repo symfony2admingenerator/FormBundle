@@ -1,9 +1,7 @@
 {% block form_css %}
-{% apply spaceless %}
     {% for child in form %}
         {{ form_css(child) }}
     {% endfor %}
-{% endapply %}
 {% endblock form_css %}
 
 {% block field_css "" %}
@@ -11,9 +9,7 @@
 {% block button_css "" %}
 
 {% block collection_css %}
-{% apply spaceless %}
 	{% for child in form %}
 	    {{ form_css(child) }}
 	{% endfor %}
-{% endapply %}
 {% endblock collection_css %}
