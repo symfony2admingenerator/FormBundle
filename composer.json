@@ -1,7 +1,7 @@
 {
     "name": "symfony2admingenerator/form-bundle",
     "type": "symfony-bundle",
-    "description": "Twig extension introducing new blocks to seperate form HTML structure from CSS decorating it and JS enhancing its functionalities.",
+    "description": "Twig extension introducing new blocks to separate form HTML structure from CSS decorating it and JS enhancing its functionalities.",
     "license": "MIT",
     "authors": [
         {
@@ -16,11 +16,11 @@
     ],
     "require": {
         "php": ">=8.1.0",
-        "symfony/config": "~4.4|~5.4|~6.2",
-        "symfony/dependency-injection": "~4.4|~5.4|~6.2",
-        "symfony/form": "~4.4|~5.4|~6.2",
-        "symfony/http-kernel": "~4.4|~5.4|~6.2",
-        "twig/twig": "^2.15.3||^3.4.3"
+        "symfony/config": "~5.4|~6.4|~7.4|~8.0",
+        "symfony/dependency-injection": "~5.4|~6.4|~7.4|~8.0",
+        "symfony/form": "~5.4|~6.4|~7.4|~8.0",
+        "symfony/http-kernel": "~5.4|~6.4|~7.4|~8.0",
+        "twig/twig": "^3.4.3"
     },
     "suggest": {
         "symfony2admingenerator/generator-bundle": "The missing symfony2 admin generator",
